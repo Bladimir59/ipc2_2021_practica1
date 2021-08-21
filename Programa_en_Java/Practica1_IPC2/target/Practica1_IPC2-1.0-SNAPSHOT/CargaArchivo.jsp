@@ -23,6 +23,6 @@
                 <button type="submit" name="accion" value="enviar"> Aceptar </button>
             </form>                  
         </div>
-        <%@include file="JavaScript.html"%> 
+       <%-- <%@include file="JavaScript.html"%> --%>
     </body>
 </html>
