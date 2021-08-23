@@ -12,7 +12,20 @@ public class Usuario extends Persona{
     private String password;
     private int divicion;
     private boolean activo;
+//para traer al Usuario
+    public Usuario(String password, String nombre) {
+        super(nombre);
+        this.password = password;
+    }
+//para ver los datos
 
+    public Usuario(String password, int divicion, String nombre) {
+        super(nombre);
+        this.password = password;
+        this.divicion = divicion;
+    }
+    
+    
     public boolean isActivo() {
         return activo;
     }

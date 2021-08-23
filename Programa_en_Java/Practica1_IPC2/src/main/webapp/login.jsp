@@ -31,15 +31,16 @@
                 <div class="col-12 user-img">
                     <img src="IMG/user.png" th:src="@{/user.png}"/>
                 </div>
-                <form nome="registro" class="col-12" action="LoginControl" method="post">
+                <form name="registro" class="col-12" action="test" method="post">
                     <div>
-                        <input type="text" name="codigo"/>
+                        <input type="text" name="nombre"/>
                     </div>
                     <div>
                         <input type="text" name="password"/>
                     </div>
                     <button type="submit" name="accion" value="datos"></i>  Ingresar </button>
                 </form>
+                
                 <div class="col-12 forgot">
                     <a href="#">Recordar contrasena?</a>
                 </div>

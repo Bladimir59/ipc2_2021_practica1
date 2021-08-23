@@ -12,6 +12,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form name="registro" action="test" method="post">
+                    <div>
+                        <input type="text" name="nombre"/>
+                    </div>
+                    <div>
+                        <input type="text" name="password"/>
+                    </div>
+                    <button type="submit" name="accion" value="datos"></i>  Ingresar </button>
+                </form>
     </body>
 </html>
