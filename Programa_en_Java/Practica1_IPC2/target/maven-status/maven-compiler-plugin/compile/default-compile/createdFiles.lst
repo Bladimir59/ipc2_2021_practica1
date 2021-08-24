@@ -11,5 +11,4 @@ server/test.class
 Clases/UsuarioAdministrador.class
 conexion/Conectar.class
 manejador/Verificar.class
-Clases/Pieza.class
 Clases/UsuarioVenta.class

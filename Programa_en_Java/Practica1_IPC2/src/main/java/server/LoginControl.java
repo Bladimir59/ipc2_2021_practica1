@@ -96,6 +96,12 @@ public class LoginControl extends HttpServlet {
         
         if(salida.getDivicion()==1){
             request.getRequestDispatcher("Fabrica.jsp").forward(request, response);
+        }else if(salida.getDivicion()==2){
+            request.getRequestDispatcher("Venta.jsp").forward(request, response);
+        }else if(salida.getDivicion()==3){
+            request.getRequestDispatcher("Financiero.jsp").forward(request, response);
+        }else{
+            request.getRequestDispatcher("ErrorDatos.jsp").forward(request, response);
         }
     }
 

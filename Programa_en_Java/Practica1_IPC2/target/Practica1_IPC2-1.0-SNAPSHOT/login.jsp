@@ -31,7 +31,7 @@
                 <div class="col-12 user-img">
                     <img src="IMG/user.png" th:src="@{/user.png}"/>
                 </div>
-                <form name="registro" class="col-12" action="test" method="post">
+                <form name="registro" class="col-12" action="LoginControl" method="post">
                     <div>
                         <input type="text" name="nombre"/>
                     </div>
