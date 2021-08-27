@@ -5,6 +5,10 @@
  */
 package main;
 
+import Clases.Pieza;
+import DAO.PiezaDAO;
+import java.util.List;
+
 /**
  *
  * @author bladimir
@@ -12,7 +16,13 @@ package main;
 public class Main {
     public static void main(String[] args) {
         //para las pruebas con las busquedas
+        String texto="USUARIO(\"blast\",\"ABC\",1)";
+
+        texto = texto.replace("USUARIO","").replace("(", "").replace(")", "");
+        System.out.println(""+texto);
         
+        String[] dividir = texto.split(",");
+        System.out.println("dato sin comillas y bien generado: "+dividir[0].replace("\"", ""));
     }
     
 }

@@ -5,8 +5,6 @@
  */
 package server;
 
-import Clases.Pieza;
-import DAO.PiezaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logica.ModificacionPieza;
 
 /**
  *
@@ -39,7 +38,7 @@ public class ServerPieza extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServerPieza</title>");            
+            out.println("<title>Servlet ServerPieza</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>envio la informacion a la base de datos " + request.getContextPath() + "</h1>");
@@ -73,23 +72,40 @@ public class ServerPieza extends HttpServlet {
      */
     //variables para capturar las de entrada de la nueva informacion
     private String nombre;
-    private double precio;
+    private Double precio;
     private int cantidad;
-    
+    private String caso;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        nombre=request.getParameter("nombre");
-        precio=Double.parseDouble(request.getParameter("precio"));
-        cantidad=Integer.parseInt(request.getParameter("cantidad"));
-        DAO.PiezaDAO nuevo = new PiezaDAO();
-        Pieza llenar = new Pieza(nombre, precio, cantidad);
-        nuevo.crearPieza(llenar);
-        processRequest(request, response);
+        try {
+            logica.ModificacionPieza datos = new ModificacionPieza();
+            caso = request.getParameter("caso");
+            if (caso.equals("modificar")) {
+                datos.setNombre(request.getParameter("nombre"));
+                datos.setPrecio(Double.parseDouble(request.getParameter("precio")));
+                datos.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
+                datos.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+                datos.define(request.getParameter("caso"));
+            } else if (caso.equals("crear")) {
+                datos.setNombre(request.getParameter("nombre"));
+                datos.setPrecio(Double.parseDouble(request.getParameter("precio")));
+                datos.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
+                datos.define(request.getParameter("caso"));
+
+            } else if (caso.equals("eliminar")) {
+                datos.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+                datos.define(request.getParameter("caso"));
+
+            }
+
+            request.getRequestDispatcher("Aceptado.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.getRequestDispatcher("ErrorDatos.jsp").forward(request, response);
+        }
+
     }
-    
-    //proceso de mandar la pieza a la base de datos
-   
 
     /**
      * Returns a short description of the servlet.

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import Clases.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author bladimir
@@ -47,6 +48,22 @@ public class UsuarioDAO {
         System.out.println("llego");
         
         return salida;
+    }
+    //para insertar nuevo usuario
+    //para crear nuevas piezas
+    private static final String nueva="INSERT INTO Usuario (Nombre_Usuario, Password, Area) VALUES (?,?,?)";
+    public void crearUsuario (Usuario usuario){
+        obtenerConexion();
+        try {
+            PreparedStatement insertar=cn.prepareStatement(nueva);
+            insertar.setString(1, usuario.getNombre());
+            insertar.setString(2, usuario.getPassword());
+            insertar.setInt(3, usuario.getDivicion());
+            
+            insertar.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }        
     }
     
 }

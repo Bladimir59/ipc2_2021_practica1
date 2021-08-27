@@ -10,19 +10,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     </head>
     <body>
         <h1>Fabrica!</h1>
         <%--formulario para la funcion de las piezas --%>
-        <form method="POST" action="">
+        <form method="POST" action="ServerFabrica">
             <h2>Piezas</h2>
             elija la opcion para ver que necesita hacer con las piezas
+            <label for="caso1">Operacion:</label>
             <select name="caso1" required>
                 <option value="Crear">Crear Pieza</option>
                 <option value="Modificar">Modificar Pieza</option>
-                <option value="Eliminar">Crear Pieza</option>
+                <option value="Eliminar">Eliminar Pieza</option>
             </select>
-            <button>Aceptar</button>
+            <button type="sumit">Aceptar</button>
         </form>
         <br>
         <%--para ver las funciones que puede hacer con los muebles --%>

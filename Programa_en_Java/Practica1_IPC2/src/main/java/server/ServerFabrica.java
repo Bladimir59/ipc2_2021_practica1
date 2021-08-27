@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author bladimir
  */
-@WebServlet(name = "test", urlPatterns = {"/test"})
-public class test extends HttpServlet {
+@WebServlet(name = "ServerFabrica", urlPatterns = {"/ServerFabrica"})
+public class ServerFabrica extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class test extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet test</title>");            
+            out.println("<title>Servlet ServerFabrica</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet test at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ServerFabrica at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,16 +69,35 @@ public class test extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private String parametro;
+    private String parametro1;
+    private String parametro2;
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("pasa");
-        String nombre=request.getParameter("nombre");
-        String password=request.getParameter("password");
-        
-        
+        parametro=request.getParameter("caso1");
+        parametro1=request.getParameter("caso2");
+        parametro2=request.getParameter("caso3");        
+        define(request, response);
     }
 
+    public void define(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        switch (parametro) {
+            case "Crear":
+                request.getRequestDispatcher("crearPieza.jsp").forward(request, response);
+                break;
+            case "Modificar":
+                request.getRequestDispatcher("modificarPieza.jsp").forward(request, response);
+                break;
+            case "Eliminar":
+                request.getRequestDispatcher("EliminarPieza.jsp").forward(request, response);
+                break;
+            default:
+                break;
+        }
+        
+    }
     /**
      * Returns a short description of the servlet.
      *

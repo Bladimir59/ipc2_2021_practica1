@@ -8,6 +8,17 @@ public class Pieza {
     private String nombre;
     private Double precio;
     private int cantidad;
+    private int id;
+
+    public Pieza(String nombre, Double precio, int cantidad, int id) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.id = id;
+    }
+
+    public Pieza() {
+    }
 
     public Pieza(String nombre, Double precio) {
         this.nombre = nombre;
@@ -43,5 +54,14 @@ public class Pieza {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
 }

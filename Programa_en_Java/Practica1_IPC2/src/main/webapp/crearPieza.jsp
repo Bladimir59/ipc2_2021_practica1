@@ -24,6 +24,8 @@
                 <br/><input required type="number" size="30" name="precio" />
                 <br/> Cantidad: 
                 <br/><input required type="number" size="30" name="cantidad" />
+                <br>
+                <input type=»text» type="number" value="crear" name="caso"/>
                 <br/>
                 <button type="submit" name="accion" value="ServerPieza">Aceptar</button>
             </fieldset>

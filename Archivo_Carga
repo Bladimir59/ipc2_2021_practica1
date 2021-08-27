@@ -43,3 +43,10 @@ ENSAMBLAR_MUEBLE(“Mesa clasica”, jgranados,”25/04/2018”)
 ENSAMBLAR_MUEBLE(“Mesa clasica”, jgranados,”26/04/2018”)
 ENSAMBLAR_MUEBLE(“Mesa clasica”, jgranados,”21/05/2018”)
 ENSAMBLAR_MUEBLE(“Mesa clasica”, jgranados,”21/06/2018”)
+
+
+CLIENTE(“José Granados”, “578964k”, ”5av 7-25 zona 1”, “Quetzaltenango”, “Quetzaltenango”)
+CLIENTE(“José Gra”, “578964k”, ”Ciudad”)
+CLIENTE(“JoGranados”, “578964k”, ”5av 7-25 zona 1”, “Quetzaltenango”, “Quetzaltenango”)
+CLIENTE(“JoGranados”, “578964k”, ”Ciudad”)
+

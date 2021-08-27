@@ -20,6 +20,21 @@ public class Cliente extends Persona{
     private String municipio;
     private String departamento;
 
+    public Cliente(String nit, String direccion, String municipio, String departamento, String nombre) {
+        super(nombre);
+        this.nit = nit;
+        this.direccion = direccion;
+        this.municipio = municipio;
+        this.departamento = departamento;
+    }
+
+    public Cliente(String nit, String direccion, String nombre) {
+        super(nombre);
+        this.nit = nit;
+        this.direccion = direccion;
+    }
+    
+
     public String getNit() {
         return nit;
     }
