@@ -8,17 +8,20 @@ package server;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import manejador.Archivo;
 
 /**
  *
  * @author bladimir
  */
 @WebServlet(name = "CargaArchivo", urlPatterns = {"/CargaArchivo"})
+@MultipartConfig ( maxFileSize  =  16177215 )
 public class CargaArchivo extends HttpServlet {
 
     /**
@@ -73,23 +76,25 @@ public class CargaArchivo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // String dirige = request.getParameter("accion");
-        //switch(dirige){
-         //   case "enviar":
-           //     manejaArchivo(request, response);
-       // }
+        String dirige = request.getParameter("accion");
+        switch(dirige){
+            case "enviar":
+                manejaArchivo(request, response);
+                break;
+        }
         processRequest(request, response);
     }
-   // public void manejaArchivo(HttpServletRequest request, HttpServletResponse response){
-     //   try {
-       //   Part direccion = request.getPart("opcion");
-         // manejador.Archivo leer=new CargaArchivo(direccion);
-         // leer.archivo();
-       //   request.getRequestDispatcher("login.jsp").forward(request, response);
-        //} catch (IOException | ServletException ex) {
-          //  ex.printStackTrace(System.out);
-        //}
-    //}
+    public void manejaArchivo(HttpServletRequest request, HttpServletResponse response){
+        System.out.println("llego al manejador");
+        try {
+          Part direccion = request.getPart("opcion");
+          manejador.Archivo leer=new Archivo(direccion);
+          leer.manejador();
+          request.getRequestDispatcher("login.jsp").forward(request, response);
+        } catch (IOException | ServletException ex) {
+            ex.printStackTrace(System.out);
+        }
+    }
 
     /**
      * Returns a short description of the servlet.

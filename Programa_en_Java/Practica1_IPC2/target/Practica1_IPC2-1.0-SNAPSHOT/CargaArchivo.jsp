@@ -17,19 +17,18 @@
         </div>
         <div>
             <hr>
-            <form action="CargaArchivo" method="post" enctype="multipart/form-data">
+            <form action="CargaArchivo" method="POST" enctype="multipart/form-data">
                 <div>
                     seleccione archivo
-                    <input type="file" name="archivo">
+                    <input type="file" name="opcion">
                 </div>
                 <button type="submit" name="accion" value="enviar"> Aceptar </button>
             </form>    
-            <input type="file" id="archivoTexto">
             <p id="mensajes"></p>
-            <script>
+          <%--  <script>
                 function abrirArchivo(evento){
                     let archivo = evento.target.files[0];
-                    
+
                     if(archivo){
                         let read = new FileRead();
                         read.onload=function(e){
@@ -37,7 +36,7 @@
                             document.getElementById('contenido').innerText=contenido;
                         };
                         read.readAsText(archivo);
-                        
+
                     }else{
                         document.getElementById('mensajes').innerText='no se a encontrado archivo';
                     }
@@ -45,8 +44,8 @@
                 window.addEventListener('load', ()=>{
                    document.getElementById('archivoTexto').addEventListener('change', abrirArchivo); 
                 });
-                
-            </script>
+
+            </script> --%>
         </div>
        <%@include file="JavaScript.html"%> 
     </body>

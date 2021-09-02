@@ -50,7 +50,6 @@ public class UsuarioDAO {
         return salida;
     }
     //para insertar nuevo usuario
-    //para crear nuevas piezas
     private static final String nueva="INSERT INTO Usuario (Nombre_Usuario, Password, Area) VALUES (?,?,?)";
     public void crearUsuario (Usuario usuario){
         obtenerConexion();

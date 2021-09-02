@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>Area Financiero!</h1>
+        <a href="CargaArchivo.jsp"><input type="button" value="Carga Archivo"></a>
     </body>
 </html>

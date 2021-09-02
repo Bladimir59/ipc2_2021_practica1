@@ -29,7 +29,7 @@
                 <br/><input required type="number" size="30" name="cantidad" />
                 <br/>ingrese el codigo del producto campo obligatorio
                 <br/><input required type="number" size="30" name="codigo" />
-                <br/> <input type=»text» type="number" value="modificar" name="caso"/>
+                <br/> <input type=»text» type="number" value="modificar" name="caso" disabled=""/>
                 <br/>
                 <button type="submit" name="accion" value="ServerPieza">Aceptar</button>
             </fieldset>

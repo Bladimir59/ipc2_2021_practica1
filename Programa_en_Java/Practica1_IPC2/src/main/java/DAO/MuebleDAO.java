@@ -32,5 +32,6 @@ public class MuebleDAO {
             ex.printStackTrace(System.out);
         }        
     }
+    //consulta si existe del mismo precio 
     
 }

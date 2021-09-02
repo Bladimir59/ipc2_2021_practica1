@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>se a guardado!</h1>
+        <a href="Fabrica.jsp"><input type="button" value="regresar"></a>
     </body>
 </html>

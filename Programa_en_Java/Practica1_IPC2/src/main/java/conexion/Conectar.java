@@ -13,7 +13,7 @@ public class Conectar {
     private static final String driver = "com.mysql.jdbc.Driver";
     private static final String user = "root";
     private static final String password = "admin";
-    private static final String url = "jdbc:mysql://localhost:3306/Practica1_IPC2";
+    private static final String url = "jdbc:mysql://localhost:3306/Practica1";
     
     //metodo encargado de ingresar a la base de datos
     public Conectar(){

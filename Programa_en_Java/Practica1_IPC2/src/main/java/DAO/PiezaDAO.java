@@ -53,6 +53,8 @@ public class PiezaDAO {
         }
         
     }
+    //para ver en la carga de archivo si existe la pieza on el precio
+    
     //para la iliminacion de una pieza
     private static  final String Delete="DELETE FROM Pieza WHERE idPieza =?;";
     public void eliminarPieza(int codigo){
@@ -86,6 +88,27 @@ public class PiezaDAO {
         } catch (Exception e) {
         }
         return listado;
+    }
+    //va a servir para la lectura de carga de archivo
+    private static final String consulta="mysql> SELECT * FROM Pieza WHERE ( Nombre_Pieza =?) AND (Costo_Pieza=?);";
+    public Pieza consultaExiste(String nombre, Double precio){
+        obtenerConexion();
+        PreparedStatement obtener=null;
+        ResultSet rs=null;
+        Pieza retorno=null;
+        try {
+            obtener=cn.prepareStatement(consulta);
+            obtener.setString(1, nombre);
+            obtener.setDouble(2, precio);
+            rs=obtener.executeQuery();
+            while (rs.next()) {                
+                retorno=new Pieza(rs.getString("Nombre_Pieza"),rs.getDouble("Costo_Pieza"), rs.getInt("Cantidad_Pieza"), rs.getInt("idPieza"));
+                
+            }
+        } catch (Exception e) {
+        }
+        
+        return retorno;
     }
     
 }
