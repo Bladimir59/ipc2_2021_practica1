@@ -8,6 +8,7 @@ public class EnsamblePieza {
     private String nombrePieza;
     private String nombreMueble;
     private int cantidad;
+    private int codigoPieza;
 
     public EnsamblePieza(String nombrePieza, String nombreMueble, int cantidad) {
         this.nombrePieza = nombrePieza;
@@ -15,6 +16,22 @@ public class EnsamblePieza {
         this.cantidad = cantidad;
     }
 
+    public EnsamblePieza(String nombreMueble, int cantidad, int codigoPieza) {
+        this.nombreMueble = nombreMueble;
+        this.cantidad = cantidad;
+        this.codigoPieza = codigoPieza;
+    }
+
+    
+    public int getCodigoPieza() {
+        return codigoPieza;
+    }
+
+    public void setCodigoPieza(int codigoPieza) {
+        this.codigoPieza = codigoPieza;
+    }
+
+    
     public String getNombrePieza() {
         return nombrePieza;
     }

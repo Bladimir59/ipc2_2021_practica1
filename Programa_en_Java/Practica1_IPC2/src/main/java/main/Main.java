@@ -5,15 +5,18 @@
  */
 package main;
 
+import Clases.Cliente;
 import Clases.EnsambleMueble;
 import Clases.Mueble;
 import Clases.Pieza;
 import Clases.Usuario;
+import DAO.ClienteDAO;
 import DAO.EnsambleMuebleDAO;
 import DAO.MuebleDAO;
 import DAO.PiezaDAO;
 import DAO.UsuarioDAO;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,26 +40,47 @@ public class Main {
         String patternUsuario ="(USUARIO)\\s*\\(\\s*\"\\s*([a-zA-Z]+)\\s*\"\\s*,\\s*\"([a-zA-Z]+)\\s*\"\\s*,(1|2|3)\\s*\\)";
         String patternMueble = "(MUEBLE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*(\\d+(.\\d+)?)\\s*\\)";
         String patternEnsamblePieza = "(ENSAMBLE_PIEZAS)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*\"([a-zA-Z ]+)\\s*\"\\s*,\\s*(\\d)\\s*\\)";
-        String patternEnsambleMueble = "(ENSAMBLAR_MUEBLE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*([a-zA-Z]+)\\s*,\\s*\"\\s*([\\d\\/]+)\\s*\"\\s*\\)";
-        String patternClienteP = "(CLIENTE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*\"([\\da-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([\\da-zA-Z\\-* ]+)\\s*\"\\s*\\)";
+        String patternEnsambleMueble = "(ENSAMBLAR_MUEBLE)\\s*\\(\\s*\"\\s*([\\w ]+)\\s*\"\\s*,\\s*([\\w]+)\\s*,\\s*\"\\s*([\\d\\/]+)\\s*\"\\s*\\)";
+        String patternClienteC = "(CLIENTE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*\"([\\da-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([\\da-zA-Z\\-* ]+)\\s*\"\\s*\\)";
         String patternClienteL = "(CLIENTE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*\"([\\da-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([\\da-zA-Z\\-* ]+)\\s*\"\\s*,\\s*\"\\s*([a-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([a-zA-Z]+)\\s*\"\\s*\\)";
 //nuevo objeto pattern
-        Pattern r = Pattern.compile(patternMueble);
+        Pattern r = Pattern.compile(patternClienteL);
         
 //now creat matches objeto
-        Matcher m = r.matcher(linea3);
+        Matcher m = r.matcher(linea7);
         
         if (m.find( )) {
+            System.out.println(""+m.group(0));
+            System.out.println(""+m.group(1));
+            System.out.println(""+m.group(2));
+            System.out.println(""+m.group(3));
+            System.out.println(""+m.group(4));
+            Clases.Cliente nuevo = new Cliente(m.group(2), m.group(3), m.group(4),m.group(5),m.group(6));
+            DAO.ClienteDAO llenar = new ClienteDAO();
+            llenar.crearCliente(nuevo);
+            
+           // System.out.println(""+m.group(5));
            // long fecha=Date.parse(m.group(4));
             //System.out.println(m.group(4)+" o este "+fecha);
-            //Clases.EnsambleMueble nuevo=new EnsambleMueble(m.group(2), m.group(3), fecha);
-            //DAO.EnsambleMuebleDAO llenar = new EnsambleMuebleDAO();
-            //llenar.nuevoEnsambleMueble(nuevo);
-            Mueble nuevo=new Mueble(m.group(2), Double.parseDouble(m.group(3)));
-            DAO.MuebleDAO llenar=new MuebleDAO();
-            llenar.crearMueble(nuevo);
+//            Clases.EnsambleMueble nuevo=new EnsambleMueble("blast", "Mesa rustica", getDate("20/10/2020"));
+//            DAO.EnsambleMuebleDAO llenar = new EnsambleMuebleDAO();
+//            llenar.nuevoEnsambleMueble(nuevo);
+//            Mueble nuevo=new Mueble(m.group(2), Double.parseDouble(m.group(3)));
+//            DAO.MuebleDAO llenar=new MuebleDAO();
+//            llenar.crearMueble(nuevo);
       } else {
          System.out.println("NO MATCH");
       }
+    }
+    public static java.sql.Date getDate(String fechainicial){
+        java.sql.Date dato=null;
+        try {
+            SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date fecha=formato.parse(fechainicial);
+            dato=new java.sql.Date(fecha.getTime());
+        } catch (Exception ex) {
+            ex.printStackTrace(System.out);
+        }
+        return dato;
     }
 }

@@ -40,5 +40,11 @@ public class EnsambleMueble {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    @Override
+    public String toString() {
+        return "EnsambleMueble{" + "nombreMueble=" + nombreMueble + ", nombreUsuario=" + nombreUsuario + ", fecha=" + fecha + '}';
+    }
+    
     
 }

@@ -25,8 +25,10 @@ public class EnsambleMuebleDAO {
         return cn;
     }
     //llenar los datos de ensamble pieza
-    private static final String nueva=" INSERT INTO  Ensamble_Mueble(Mueble_Nombre_Mueble, Usuario_Nombre_Usuario , Usuario_Nombre_Usuario , Estado) VALUES (?,?,?,?) ";
+    private static final String nueva="INSERT INTO  Ensamble_Mueble( Usuario_Nombre_Usuario , Mueble_Nombre_Mueble , Fecha_Ensamble , Estado) "
+            + "VALUES (?,?,?,?)";
     public void nuevoEnsambleMueble (EnsambleMueble dato){
+        System.out.println(""+dato.toString());
         obtenerConexion();
         try {
             PreparedStatement insertar=cn.prepareStatement(nueva);

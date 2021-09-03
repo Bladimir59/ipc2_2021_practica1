@@ -90,22 +90,47 @@ public class PiezaDAO {
         return listado;
     }
     //va a servir para la lectura de carga de archivo
-    private static final String consulta="mysql> SELECT * FROM Pieza WHERE ( Nombre_Pieza =?) AND (Costo_Pieza=?);";
+    private static final String consulta="SELECT * FROM Pieza WHERE ( Nombre_Pieza =?) AND (Costo_Pieza=?);";
     public Pieza consultaExiste(String nombre, Double precio){
         obtenerConexion();
         PreparedStatement obtener=null;
         ResultSet rs=null;
         Pieza retorno=null;
+        System.out.println(""+nombre+" desde consulta existe");
         try {
             obtener=cn.prepareStatement(consulta);
             obtener.setString(1, nombre);
             obtener.setDouble(2, precio);
+            System.out.println("======"+obtener.toString()+"====");
             rs=obtener.executeQuery();
             while (rs.next()) {                
                 retorno=new Pieza(rs.getString("Nombre_Pieza"),rs.getDouble("Costo_Pieza"), rs.getInt("Cantidad_Pieza"), rs.getInt("idPieza"));
                 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        
+        return retorno;
+    }
+    //retorna su codigo
+    private static final String consulta1="SELECT * FROM Pieza WHERE Nombre_Pieza=? LIMIT 1";
+    public Pieza consultacodigo(String nombre){
+        obtenerConexion();
+        PreparedStatement obtener=null;
+        ResultSet rs=null;
+        Pieza retorno=null;
+        System.out.println(""+nombre+" desde consulta existe");
+        try {
+            obtener=cn.prepareStatement(consulta1);
+            obtener.setString(1, nombre);
+            rs=obtener.executeQuery();
+            while (rs.next()) {                
+                retorno=new Pieza(rs.getString("Nombre_Pieza"),rs.getDouble("Costo_Pieza"), rs.getInt("Cantidad_Pieza"), rs.getInt("idPieza"));
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
         }
         
         return retorno;

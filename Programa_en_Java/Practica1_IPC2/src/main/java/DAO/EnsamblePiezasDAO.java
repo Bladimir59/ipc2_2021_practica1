@@ -32,7 +32,7 @@ public class EnsamblePiezasDAO {
         try {
             PreparedStatement insertar=cn.prepareStatement(nueva);
             insertar.setString(1, dato.getNombreMueble());
-            insertar.setString(2, dato.getNombrePieza());
+            insertar.setInt(2, dato.getCodigoPieza());
             insertar.setInt(3, dato.getCantidad());
             insertar.executeUpdate();
         } catch (SQLException ex) {

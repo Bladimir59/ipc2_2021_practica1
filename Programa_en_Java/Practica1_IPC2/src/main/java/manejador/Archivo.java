@@ -5,9 +5,15 @@
  */
 package manejador;
 
+import Clases.Cliente;
+import Clases.EnsambleMueble;
+import Clases.EnsamblePieza;
 import Clases.Mueble;
 import Clases.Pieza;
 import Clases.Usuario;
+import DAO.ClienteDAO;
+import DAO.EnsambleMuebleDAO;
+import DAO.EnsamblePiezasDAO;
 import DAO.MuebleDAO;
 import DAO.PiezaDAO;
 import DAO.UsuarioDAO;
@@ -15,6 +21,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -38,20 +46,20 @@ public class Archivo {
         //clases para llenar
 
         BufferedReader br = null;
-        
+
         //los pattenrs para la configuracion de los datos en la cual se divide los datos en sus diferentes estructuras
         try {
             br = new BufferedReader(new InputStreamReader(direccion.getInputStream()));
             String linea = br.readLine();
             while (linea != null) {
-                linea = br.readLine();
+                
                 //para quitar los espacios por delante y atras de la linea a leer
                 String in = linea.trim();
                 String patternPieza = "(PIEZA)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*(\\d+(\\.\\d+)?)\\s*\\)";
-                String patternUsuario = "(USUARIO)\\s*\\(\\s*\"\\s*([a-zA-Z]+)\\s*\"\\s*,\\s*\"([a-zA-Z\\_]+)\\s*\"\\s*,(1|2|3)\\s*\\)";
+                String patternUsuario = "(USUARIO)\\s*\\(\\s*\"\\s*([a-zA-Z]+)\\s*\"\\s*,\\s*\"([\\w\\_\\.\\-0-9]+)\\s*\"\\s*,(1|2|3)\\s*\\)";
                 String patternMueble = "(MUEBLE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*(\\d+(.\\d+)?)\\s*\\)";
                 String patternEnsamblePieza = "(ENSAMBLE_PIEZAS)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*\"([a-zA-Z ]+)\\s*\"\\s*,\\s*(\\d)\\s*\\)";
-                String patternEnsambleMueble = "(ENSAMBLAR_MUEBLE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*([a-zA-Z]+)\\s*,\\s*\"\\s*([\\d\\/]+)\\s*\"\\s*\\)";
+                String patternEnsambleMueble = "(ENSAMBLAR_MUEBLE)\\s*\\(\\s*\"\\s*([\\w ]+)\\s*\"\\s*,\\s*([\\w]+)\\s*,\\s*\"\\s*([\\d\\/]+)\\s*\"\\s*\\)";
                 String patternClienteC = "(CLIENTE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*\"([\\da-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([\\da-zA-Z\\-* ]+)\\s*\"\\s*\\)";
                 String patternClienteL = "(CLIENTE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*\"([\\da-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([\\da-zA-Z\\-* ]+)\\s*\"\\s*,\\s*\"\\s*([a-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([a-zA-Z]+)\\s*\"\\s*\\)";
 
@@ -71,74 +79,71 @@ public class Archivo {
                 Matcher clienteC = analizaClientecorto.matcher(in);
                 Matcher clienteL = analizaClientelargo.matcher(in);
                 if (pieza.find()) {
-                    DAO.PiezaDAO revisar = null;
-                    Pieza datos=new Pieza();
-                    datos=revisar.consultaExiste(pieza.group(2), Double.parseDouble(pieza.group(3)));
-                    if(datos==null){ 
+
+                    DAO.PiezaDAO revisar = new PiezaDAO();
+                    Pieza datos = new Pieza();
+                    System.out.println("" + pieza.group(2));
+                    datos = revisar.consultaExiste(pieza.group(2), Double.parseDouble(pieza.group(3)));
+                    if (datos == null) {
                         Pieza nuevaPieza = new Pieza(pieza.group(2), Double.parseDouble(pieza.group(3)), 1);
                         revisar.crearPieza(nuevaPieza);
-                    }else{
-                        Pieza nuevosDatos = new Pieza(datos.getNombre(), datos.getPrecio(), datos.getCantidad()+1, datos.getId());
+                    } else {
+                        Pieza nuevosDatos = new Pieza(datos.getNombre(), datos.getPrecio(), datos.getCantidad() + 1, datos.getId());
                         revisar.modificarPieza(nuevosDatos);
                     }
                 } else if (usuario.find()) {
-                    Usuario nuevoUsuario = new Usuario(usuario.group(3), Integer.parseInt(usuario.group(4)), usuario.group(2));
+                    Usuario nuevoUsuario = new Usuario(usuario.group(3).trim(), Integer.parseInt(usuario.group(4)), usuario.group(2).trim());
                     DAO.UsuarioDAO llenarUsuario = new UsuarioDAO();
                     llenarUsuario.crearUsuario(nuevoUsuario);
 
                 } else if (mueble.find()) {
-                    Mueble nuevoMueble = new Mueble(mueble.group(2), Double.parseDouble(mueble.group(3)));
-                    DAO.MuebleDAO llenarMueble=new MuebleDAO();
+                    Mueble nuevoMueble = new Mueble(mueble.group(2).trim(), Double.parseDouble(mueble.group(3)));
+                    DAO.MuebleDAO llenarMueble = new MuebleDAO();
                     llenarMueble.crearMueble(nuevoMueble);
 
                 } else if (ensambleP.find()) {
+                    PiezaDAO consulta = new PiezaDAO();
+                    Pieza dato = new Pieza();
+                    dato=consulta.consultacodigo(ensambleP.group(3));
+                    
+                    Clases.EnsamblePieza nuevoEnsamblePiesas = new EnsamblePieza(ensambleP.group(2), Integer.parseInt(ensambleP.group(4)), dato.getId());
+                    DAO.EnsamblePiezasDAO llenarEnsamblePiezas = new EnsamblePiezasDAO();
+                    llenarEnsamblePiezas.nuevoEnsamblePieza(nuevoEnsamblePiesas);
 
                 } else if (ensambleM.find()) {
+                    Clases.EnsambleMueble nuevoEnsambleMueble = new EnsambleMueble(ensambleM.group(3).trim(), ensambleM.group(2).trim(), getDate(ensambleM.group(4)));
+                    DAO.EnsambleMuebleDAO llenarEnsambleMueble = new EnsambleMuebleDAO();
+                    llenarEnsambleMueble.nuevoEnsambleMueble(nuevoEnsambleMueble);
 
                 } else if (clienteC.find()) {
+                    Clases.Cliente nuevoClienteC = new Cliente(clienteC.group(2), clienteC.group(3), clienteC.group(4));
+                    DAO.ClienteDAO llenarClienteC = new ClienteDAO();
+                    llenarClienteC.crearCliente(nuevoClienteC);
 
                 } else if (clienteL.find()) {
-
+                    Clases.Cliente nuevoClienteL = new Cliente(clienteL.group(2), clienteL.group(3), clienteL.group(4), clienteL.group(5), clienteL.group(6));
+                    DAO.ClienteDAO llenarClienteL = new ClienteDAO();
+                    llenarClienteL.crearCliente(nuevoClienteL);
+                }else{
+                    System.out.println(""+linea);
                 }
-
+                linea = br.readLine();
             }
 
         } catch (Exception e) {
         }
 
     }
-
-    //llenando piesas
-    private void llenarPieza(String datos) {
-        Double precio;
-        String nombre;
-        int cantidad = 0;
-        datos = datos.replace("PIEZA", "");
-        String[] descripcion = datos.replace("(", "").replace(")", "").split(",");
-
-        nombre = descripcion[0].replace("\"", "");
-        System.out.println("" + nombre);
-        precio = Double.parseDouble(descripcion[1]);
-
-        listaPieza = new ArrayList<>();
-        for (int i = 0; i < listaPieza.size(); i++) {
-            if ((nombre.equals(listaPieza.get(i).getNombre())) && (precio == listaPieza.get(i).getPrecio())) {
-                cantidad = listaPieza.get(i).getCantidad();
-                cantidad = cantidad + 1;
-                listaPieza.get(i).setCantidad(cantidad);
-            } else {
-                Pieza agregar = new Pieza(nombre, precio, cantidad);
-                listaPieza.add(agregar);
-            }
+    
+    public static java.sql.Date getDate(String fechainicial){
+        java.sql.Date dato=null;
+        try {
+            SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy");
+            java.util.Date fecha=formato.parse(fechainicial);
+            dato=new java.sql.Date(fecha.getTime());
+        } catch (Exception ex) {
+            ex.printStackTrace(System.out);
         }
-    }
-
-    public void llenarBD() {
-        DAO.PiezaDAO llenar = new PiezaDAO();
-        Pieza agregar;
-        for (int i = 0; i < listaPieza.size(); i++) {
-            agregar = new Pieza(listaPieza.get(i).getNombre(), listaPieza.get(i).getPrecio(), listaPieza.get(i).getCantidad());
-            llenar.crearPieza(agregar);
-        }
+        return dato;
     }
 }
