@@ -9,6 +9,7 @@ import Clases.Cliente;
 import conexion.Conectar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -36,8 +37,29 @@ public class ClienteDAO {
             insertar.setString(4, dato.getMunicipio());
             insertar.setString(5, dato.getDepartamento());
             insertar.executeUpdate();
+            
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         }        
     }
+    
+    //para verificar el nit
+    private static final String verClienteNit="SELECT * FROM Cliente WHERE NIT=?;";
+    public Cliente verCliente_Nit(String nit){
+        obtenerConexion();
+        PreparedStatement obtener=null;
+        ResultSet rs=null;
+        Cliente retorno=null;
+        try {
+            obtener=cn.prepareStatement(verClienteNit);
+            obtener.setString(1, nit);
+            rs=obtener.executeQuery();
+            while (rs.next()) {                
+                retorno=new  Cliente(rs.getString("NIT"), rs.getString("Direccion"), rs.getString("Municipio"), rs.getString("Departamento"), rs.getString("Nombre_Cliente"));
+            }
+        } catch (Exception e) {
+        }
+        return retorno;
+    }
+
 }

@@ -24,6 +24,8 @@
                 <br/>
                 <button type="submit" name="accion" value="ServerPieza">Aceptar</button>
             </fieldset>
+            
+            
         </form>
     </body>
 </html>

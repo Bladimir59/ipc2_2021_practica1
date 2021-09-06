@@ -126,12 +126,12 @@ public class Archivo {
                     llenarEnsambleMueble.nuevoEnsambleMueble(nuevoEnsambleMueble);
 
                 } else if (clienteC.find()) {
-                    Clases.Cliente nuevoClienteC = new Cliente(clienteC.group(2), clienteC.group(3), clienteC.group(4));
+                    Clases.Cliente nuevoClienteC = new Cliente(clienteC.group(3), clienteC.group(4), clienteC.group(2));
                     DAO.ClienteDAO llenarClienteC = new ClienteDAO();
                     llenarClienteC.crearCliente(nuevoClienteC);
 
                 } else if (clienteL.find()) {
-                    Clases.Cliente nuevoClienteL = new Cliente(clienteL.group(2), clienteL.group(3), clienteL.group(4), clienteL.group(5), clienteL.group(6));
+                    Clases.Cliente nuevoClienteL = new Cliente(clienteL.group(3), clienteL.group(4), clienteL.group(5), clienteL.group(6), clienteL.group(2));
                     DAO.ClienteDAO llenarClienteL = new ClienteDAO();
                     llenarClienteL.crearCliente(nuevoClienteL);
                 }else{

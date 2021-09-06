@@ -7,12 +7,17 @@ package Clases;
 public class Mueble {
     private String nombre;
     private double precio;
+    private int cantidad;
 
     public Mueble(String nombre, double precio) {
         this.nombre = nombre;
         this.precio = precio;
     }
 
+    public Mueble() {
+    }
+
+    
     public String getNombre() {
         return nombre;
     }

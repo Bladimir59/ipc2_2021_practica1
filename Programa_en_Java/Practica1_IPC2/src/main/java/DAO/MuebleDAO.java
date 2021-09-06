@@ -53,6 +53,28 @@ public class MuebleDAO {
         }
         return mueble;
     }
+    //crear Mueble
+    private static final String solouno="SELECT * FROM Mueble WHERE Nombre_Mueble=?";
+    public Mueble obtenerMueble(String nombre){
+        obtenerConexion();
+        
+        PreparedStatement obtener = null;
+        ResultSet rs=null;
+        Mueble dato =null;
+        try {
+            obtener=cn.prepareStatement(solouno);
+            obtener.setString(1, nombre);
+            rs=obtener.executeQuery();
+            while (rs.next()) {
+                dato = new Mueble(rs.getString("Nombre_Mueble"), rs.getDouble("Costo_Mueble"));
+                
+                
+            }
+        } catch (SQLException ex) {
+           ex.printStackTrace(System.out);
+        }
+        return dato;
+    }
     
     
 }

@@ -1,3 +1,7 @@
+DROP USER IF EXISTS 'admin'@'localhost';
+CREATE USER 'admin'@'localhost' identified by 'Admin';
+GRANT ALL PRIVILEGES ON Practica1.* TO admin@localhost;
+FLUSH PRIVILEGES;
 
 CREATE SCHEMA `Practica1` ;
 USE `Practica1` ;
@@ -149,4 +153,4 @@ CREATE TABLE IF NOT EXISTS `Practica1`.`CostoPieza` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO Usuario (Nombre_Usuario, Password, Area) VALUES ('admin','admin',3)
+INSERT INTO Usuario (Nombre_Usuario, Password, Area) VALUES ('admin','admin',3);

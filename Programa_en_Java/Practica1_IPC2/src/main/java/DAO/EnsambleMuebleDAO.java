@@ -9,8 +9,10 @@ import Clases.EnsambleMueble;
 import conexion.Conectar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -42,5 +44,26 @@ public class EnsambleMuebleDAO {
             ex.printStackTrace(System.out);
         }        
     }
-    
+    private static final String VerEnFabrica="SELECT * FROM Ensamble_Mueble WHERE Estado = TRUE";
+    public List<EnsambleMueble> verEstado(){
+        List<EnsambleMueble> listado = new ArrayList<>();
+        obtenerConexion();
+        PreparedStatement obtener=null;
+        ResultSet rs = null;
+        try {
+            obtener=cn.prepareStatement(VerEnFabrica);
+            rs=obtener.executeQuery();
+            while (rs.next()) {                
+                EnsambleMueble lista = new EnsambleMueble(rs.getString("Mueble_Nombre_Mueble"), rs.getString("Usuario_Nombre_Usuario"),rs.getDate("Fecha_Ensamble"), rs.getBoolean("Estado"));
+                lista.setNombreMueble(rs.getString("Mueble_Nombre_Mueble"));
+                lista.setNombreUsuario(rs.getString("Usuario_Nombre_Usuario"));
+                lista.setFecha(rs.getDate("Fecha_Ensamble"));
+                lista.setEstado(rs.getBoolean("Estado"));
+                listado.add(lista);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return listado;
+    }
 }

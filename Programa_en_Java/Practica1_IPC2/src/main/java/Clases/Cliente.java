@@ -10,10 +10,11 @@ package Clases;
  * @author bladimir
  */
 public class Cliente extends Persona{
-    
-    public Cliente(String nombre) {
-        super(nombre);
+
+    public Cliente() {
     }
+    
+    
     //datos nuevos del cliente
     private String nit;
     private String direccion;

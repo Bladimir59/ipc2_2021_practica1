@@ -11,6 +11,10 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    public Persona() {
+    }
+    
+
     public String getNombre() {
         return nombre;
     }

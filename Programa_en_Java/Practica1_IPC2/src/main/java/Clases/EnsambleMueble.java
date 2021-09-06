@@ -10,11 +10,30 @@ public class EnsambleMueble {
     private String nombreMueble;
     private String nombreUsuario;
     private Date fecha;
+    private Boolean estado;
+
+    public EnsambleMueble(String nombreMueble, String nombreUsuario, Date fecha, Boolean estado) {
+        this.nombreMueble = nombreMueble;
+        this.nombreUsuario = nombreUsuario;
+        this.fecha = fecha;
+        this.estado = estado;
+    }
 
     public EnsambleMueble(String nombreMueble, String nombreUsuario, Date fecha) {
         this.nombreMueble = nombreMueble;
         this.nombreUsuario = nombreUsuario;
         this.fecha = fecha;
+    }
+
+    public EnsambleMueble() {
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     public String getNombreMueble() {

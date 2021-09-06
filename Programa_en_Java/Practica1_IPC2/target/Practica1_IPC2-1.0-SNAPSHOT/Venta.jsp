@@ -13,8 +13,14 @@
     </head>
     <body>
         <h1>VENTA!</h1>
-        <h2>Vender </h2>
-        <br>
+        <form method="post" action="Venta" name="verificaCliente">
+            <h2>Vender </h2>
+            ingrese nit del Cliente para iniciar la gestion del cliente
+            <br/>
+            <input type="text" name="NIT"/>
+            <button type="submit" name="accion">aceptar</button>
+        </form>
+        <br/>
         <h2>Devolucion </h2>
         <br>
         <form method="POST" action="">

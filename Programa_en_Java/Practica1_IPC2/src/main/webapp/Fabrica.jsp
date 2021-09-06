@@ -29,12 +29,12 @@
         </form>
         <br>
         <%--para ver las funciones que puede hacer con los muebles --%>
-        
+        <form action="pasaAtributos" method="post">
             <h2>Muebles</h2>
             elija la opcion para ver que necesita hacer con las piezas
-            <a href="FabricaMueble/EnsambleMueble.jsp"><input type="button" value="Ensamblar"></a>
-            <a href="FabricaMueble/RegistrarMueble.jsp"><input type="button" value="Registrar"></a>
-                
+            <a href="EnsambleMueble.jsp"><input type="button" value="Ensamblar"></a>
+            <a href="RegistrarMueble.jsp"><input type="button" value="Registrar"></a>
+        </form>
         <br>
         <form method="POST" action="ServerFabrica">
             <h2>Informe</h2>

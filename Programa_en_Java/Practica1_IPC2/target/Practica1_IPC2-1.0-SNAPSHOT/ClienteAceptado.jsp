@@ -1,6 +1,6 @@
 <%-- 
-    Document   : RegistrarMueble
-    Created on : 5/09/2021, 14:37:05
+    Document   : ClienteAceptado
+    Created on : 6/09/2021, 08:09:20
     Author     : bladimir
 --%>
 
@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Ingreso Correcto!</h1>
+        <a href="Venta.jsp"><input type="button" value="regresar"></a>
     </body>
 </html>

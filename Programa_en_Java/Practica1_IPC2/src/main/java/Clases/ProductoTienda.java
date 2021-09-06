@@ -22,6 +22,19 @@ public class ProductoTienda {
         this.cantidad = cantidad;
     }
 
+    public ProductoTienda(String nombre, Double precio, int cantidad) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+
+    public ProductoTienda(int id, int cantidad) {
+        this.id = id;
+        this.cantidad = cantidad;
+    }
+    
+    
+    
     public ProductoTienda() {
     }
 

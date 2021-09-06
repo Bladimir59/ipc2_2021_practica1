@@ -10,10 +10,13 @@ import Clases.Costo;
 import Clases.EnsambleMueble;
 import Clases.Mueble;
 import Clases.Pieza;
+import Clases.ProductoTienda;
 import Clases.Usuario;
+import Controlador.FabricaTienda;
 import DAO.ClienteDAO;
 import DAO.EnsambleMuebleDAO;
 import DAO.MuebleDAO;
+import DAO.MuebleTiendaDAO;
 import DAO.PiezaDAO;
 import DAO.UsuarioDAO;
 import java.sql.Date;
@@ -46,10 +49,10 @@ public class Main {
         String patternClienteC = "(CLIENTE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*\"([\\da-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([\\da-zA-Z\\-* ]+)\\s*\"\\s*\\)";
         String patternClienteL = "(CLIENTE)\\s*\\(\\s*\"\\s*([a-zA-Z ]+)\\s*\"\\s*,\\s*\"([\\da-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([\\da-zA-Z\\-* ]+)\\s*\"\\s*,\\s*\"\\s*([a-zA-Z]+)\\s*\"\\s*,\\s*\"\\s*([a-zA-Z]+)\\s*\"\\s*\\)";
 //nuevo objeto pattern
-        Pattern r = Pattern.compile(patternPieza);
+        Pattern r = Pattern.compile(patternClienteC);
 
 //now creat matches objeto
-        Matcher m = r.matcher(linea);
+        Matcher m = r.matcher(linea6);
 
         if (m.find()) {
             System.out.println("" + m.group(0));
@@ -65,15 +68,21 @@ public class Main {
             // long fecha=Date.parse(m.group(4));
             //System.out.println(m.group(4)+" o este "+fecha);
 //            Clases.EnsambleMueble nuevo=new EnsambleMueble("blast", "Mesa rustica", getDate("20/10/2020"));
-//            DAO.EnsambleMuebleDAO llenar = new EnsambleMuebleDAO();
+            //DAO.EnsambleMuebleDAO llenar = new EnsambleMuebleDAO();
+            Controlador.FabricaTienda texto = new FabricaTienda();
+            System.out.println(""+texto.getEnsambles());
 //            llenar.nuevoEnsambleMueble(nuevo);
 //            Mueble nuevo=new Mueble(m.group(2), Double.parseDouble(m.group(3)));
 //            DAO.MuebleDAO llenar=new MuebleDAO();
 //            llenar.crearMueble(nuevo);
-           DAO.PiezaDAO nuevo = new PiezaDAO();
-           Costo llenar = new Costo(m.group(2), Double.parseDouble(m.group(3)), 1);
-           nuevo.crearCosto(llenar);
-           
+           //DAO.PiezaDAO nuevo = new PiezaDAO();
+           //Costo llenar = new Costo(m.group(2), Double.parseDouble(m.group(3)), 1);
+           //nuevo.crearCosto(llenar);
+           //MuebleTiendaDAO llenar = new MuebleTiendaDAO();
+           //Clases.ProductoTienda nuevo = new ProductoTienda();
+           //llenar.mover(nuevo);
+           //nuevo=llenar.obtenerProducto(1);
+           // System.out.println(""+nuevo.getNombre()+" "+nuevo.getCantidad());
 
         } else {
             System.out.println("NO MATCH");

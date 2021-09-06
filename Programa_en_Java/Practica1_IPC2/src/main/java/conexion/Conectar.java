@@ -11,7 +11,7 @@ public class Conectar {
     
     //variables que son datos de la base de datos
     private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String user = "root";
+    private static final String user = "admin";
     private static final String password = "admin";
     private static final String url = "jdbc:mysql://localhost:3306/Practica1";
     

@@ -6,7 +6,9 @@
 package Controlador;
 
 import Clases.Mueble;
+import Clases.ProductoTienda;
 import DAO.MuebleDAO;
+import DAO.MuebleTiendaDAO;
 
 /**
  *
@@ -14,23 +16,23 @@ import DAO.MuebleDAO;
  */
 public class ControladorMueble {
     public String getMueble(){
-        MuebleDAO lista = new MuebleDAO();
+        MuebleTiendaDAO lista = new MuebleTiendaDAO();
         String htmlcodigo="";
-        for (Mueble datos:lista.obtenerListaMueble()) {
+        for (ProductoTienda datos:lista.muebles()) {
             htmlcodigo +="<div class=\"col-sm-4\">\n" +
 "							<div class=\"product-image-wrapper\">\n" +
 "								<div class=\"single-products\">\n" +
 "									<div class=\"productinfo text-center\">\n" +
-"										<img src=\"images/home/product1.jpg\" alt=\"\" />\n" +
+"										<img src= alt=\"\" />\n" +
 "										<h2>Q"+datos.getPrecio()+"</h2>\n" +
 "										<p>"+datos.getNombre()+"</p>\n" +
-"										<a href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Add to cart</a>\n" +
+"										<a href=\"product-details.jsp?id="+datos.getId()+"\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Ver Detalles</a>\n" +
 "									</div>\n" +
 "									<div class=\"product-overlay\">\n" +
 "										<div class=\"overlay-content\">\n" +
 "											<h2>Q"+datos.getPrecio()+"</h2>\n" +
 "											<p>"+datos.getNombre()+"</p>\n" +
-"											<a href=\"#\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Add to cart</a>\n" +
+"											<a href=\"VentaJSP/Plantilla/product-details.jsp?id="+datos.getId()+"\" class=\"btn btn-default add-to-cart\"><i class=\"fa fa-shopping-cart\"></i>Ver Detalles</a>\n" +
 "										</div>\n" +
 "									</div>\n" +
 "								</div>\n" +
@@ -44,5 +46,9 @@ public class ControladorMueble {
 "						</div>";
         }
         return htmlcodigo;
+    }
+    
+    public ProductoTienda obtenerProducto(int id){
+        return new MuebleTiendaDAO().obtenerProducto(id);
     }
 }
