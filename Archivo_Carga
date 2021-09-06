@@ -44,8 +44,7 @@ ENSAMBLE_PIEZAS("Mesa rustica","Pata cuadrada",4)
 ENSAMBLE_PIEZAS("Mesa clasica","plancha de madera ovalada clasica",1)
 
 CLIENTE("Jos Granados", "578964k", "5av 7-25 zona 1", "Quetzaltenango", "Quetzaltenango")
-CLIENTE("Jos Gra", "578964k", "Ciudad")
-CLIENTE("JoGranados", "578964k", "5av 7-25 zona 1", "Quetzaltenango", "Quetzaltenango")
-CLIENTE("JoGranados", "578964k", "Ciudad")
+CLIENTE("Jos Gra", "5789364k", "Ciudad")
+CLIENTE("JoGranados", "5784964k", "5av 7-25 zona 1", "Quetzaltenango", "Quetzaltenango")
+CLIENTE("JoGranados", "57894264k", "Ciudad")
 
-CLIENTE("Jose Gra", "578964k", "Ciudad")

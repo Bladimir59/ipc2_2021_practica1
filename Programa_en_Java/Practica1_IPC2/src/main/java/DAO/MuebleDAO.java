@@ -4,7 +4,9 @@ import Clases.Mueble;
 import conexion.Conectar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,5 +35,24 @@ public class MuebleDAO {
         }        
     }
     //consulta si existe del mismo precio 
+    //listado de muebles
+    public  ArrayList<Mueble> obtenerListaMueble(){
+        ArrayList<Mueble> mueble=new ArrayList<>();
+        obtenerConexion();
+        PreparedStatement pat=null;
+        ResultSet rs = null;
+        try {
+            String Query= "SELECT * FROM Mueble"; 
+            pat =cn.prepareStatement(Query);
+            rs = pat.executeQuery();
+            while (rs.next()) {                
+                mueble.add(new Mueble(rs.getString("Nombre_Mueble"), rs.getDouble("Costo_Mueble")));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        return mueble;
+    }
+    
     
 }

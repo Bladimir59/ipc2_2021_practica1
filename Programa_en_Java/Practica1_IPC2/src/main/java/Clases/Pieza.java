@@ -20,6 +20,11 @@ public class Pieza {
     public Pieza() {
     }
 
+    public Pieza(String nombre) {
+        this.nombre = nombre;
+    }
+    
+
     public Pieza(String nombre, Double precio) {
         this.nombre = nombre;
         this.precio = precio;
@@ -61,6 +66,11 @@ public class Pieza {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Pieza{" + "nombre=" + nombre + ", precio=" + precio + ", cantidad=" + cantidad + ", id=" + id + '}';
     }
     
     

@@ -6,6 +6,7 @@
 package manejador;
 
 import Clases.Cliente;
+import Clases.Costo;
 import Clases.EnsambleMueble;
 import Clases.EnsamblePieza;
 import Clases.Mueble;
@@ -79,17 +80,30 @@ public class Archivo {
                 Matcher clienteC = analizaClientecorto.matcher(in);
                 Matcher clienteL = analizaClientelargo.matcher(in);
                 if (pieza.find()) {
-
-                    DAO.PiezaDAO revisar = new PiezaDAO();
-                    Pieza datos = new Pieza();
+                    DAO.PiezaDAO revisar = new PiezaDAO();                  
+                    Pieza datosPieza = new Pieza();                    
                     System.out.println("" + pieza.group(2));
-                    datos = revisar.consultaExiste(pieza.group(2), Double.parseDouble(pieza.group(3)));
-                    if (datos == null) {
-                        Pieza nuevaPieza = new Pieza(pieza.group(2), Double.parseDouble(pieza.group(3)), 1);
-                        revisar.crearPieza(nuevaPieza);
+                    //consulta si existe la Pieza
+                    datosPieza=revisar.consultaExistePieza(pieza.group(2));
+                    if (datosPieza == null) {
+                        Pieza nuevosDatos = new Pieza(pieza.group(2));
+                        revisar.crearPieza(nuevosDatos);
+                        Costo nuevoCosto = new Costo(pieza.group(2), Double.parseDouble(pieza.group(3)), 1);
+                        revisar.crearCosto(nuevoCosto);
+                        
                     } else {
-                        Pieza nuevosDatos = new Pieza(datos.getNombre(), datos.getPrecio(), datos.getCantidad() + 1, datos.getId());
-                        revisar.modificarPieza(nuevosDatos);
+                        Costo datos = new Costo();
+                        datos=revisar.consultaExisteCosto(pieza.group(2), Double.parseDouble(pieza.group(3)));
+                        if(datos==null){
+                            Costo nuevoCosto = new Costo(pieza.group(2), Double.parseDouble(pieza.group(3)), 1);
+                            revisar.crearCosto(nuevoCosto);
+                        }else{
+                            int cantidad=datos.getCantidad()+1;
+                            Costo update = new Costo(datos.getId(), pieza.group(2), Double.parseDouble(pieza.group(3)), cantidad);
+                            revisar.modificarPieza(update);
+                            //agregar el update
+                            
+                        }
                     }
                 } else if (usuario.find()) {
                     Usuario nuevoUsuario = new Usuario(usuario.group(3).trim(), Integer.parseInt(usuario.group(4)), usuario.group(2).trim());
@@ -102,11 +116,7 @@ public class Archivo {
                     llenarMueble.crearMueble(nuevoMueble);
 
                 } else if (ensambleP.find()) {
-                    PiezaDAO consulta = new PiezaDAO();
-                    Pieza dato = new Pieza();
-                    dato=consulta.consultacodigo(ensambleP.group(3));
-                    
-                    Clases.EnsamblePieza nuevoEnsamblePiesas = new EnsamblePieza(ensambleP.group(2), Integer.parseInt(ensambleP.group(4)), dato.getId());
+                    Clases.EnsamblePieza nuevoEnsamblePiesas = new EnsamblePieza(ensambleP.group(3), ensambleP.group(2) , Integer.parseInt(ensambleP.group(4)));
                     DAO.EnsamblePiezasDAO llenarEnsamblePiezas = new EnsamblePiezasDAO();
                     llenarEnsamblePiezas.nuevoEnsamblePieza(nuevoEnsamblePiesas);
 
@@ -131,6 +141,7 @@ public class Archivo {
             }
 
         } catch (Exception e) {
+            e.printStackTrace(System.out);
         }
 
     }

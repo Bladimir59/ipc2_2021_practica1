@@ -1,5 +1,6 @@
 package DAO;
 
+import Clases.Costo;
 import conexion.Conectar;
 import java.sql.Connection;
 import Clases.Pieza;
@@ -24,29 +25,42 @@ public class PiezaDAO {
     }
     
     //para crear nuevas piezas
-    private static final String nueva=" INSERT INTO Pieza (Nombre_Pieza, Costo_Pieza, Cantidad_Pieza) VALUES (?,?,?) ";
+    private static final String nueva=" INSERT INTO Pieza (Nombre_Pieza) VALUES (?) ";
     public void crearPieza (Pieza pieza){
         obtenerConexion();
         try {
             PreparedStatement insertar=cn.prepareStatement(nueva);
             insertar.setString(1, pieza.getNombre());
-            insertar.setDouble(2, pieza.getPrecio());
-            insertar.setInt(3, pieza.getCantidad());
             insertar.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         }        
     }
+    //para su costo
+    private static final String nuevoCosto="INSERT INTO CostoPieza(Pieza_Nombre_Pieza, Costo ,Cantidad) VALUE (?,?,?)";
+    public  void crearCosto (Costo costo){
+        obtenerConexion();
+        try {
+            PreparedStatement insertar=cn.prepareStatement(nuevoCosto);
+            insertar.setString(1, costo.getNombre());
+            insertar.setDouble(2, costo.getCosto());
+            insertar.setInt(3, costo.getCantidad());
+            insertar.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+    }
+    
     //para la modificacion de los datos de una pieza
-    private static  final String modificar="UPDATE Pieza SET Nombre_Pieza =?, Costo_Pieza=?,  Cantidad_Pieza=? WHERE idPieza=?";
-    public void modificarPieza(Pieza pieza){
+    private static  final String modificar="UPDATE CostoPieza SET  Pieza_Nombre_Pieza =?, Costo=?,  Cantidad=? WHERE idCosto=?";
+    public void modificarPieza(Costo dato){
         obtenerConexion();
         try {
             PreparedStatement insertar = cn.prepareStatement(modificar);
-            insertar.setString(1, pieza.getNombre());
-            insertar.setDouble(2, pieza.getPrecio());
-            insertar.setInt(3, pieza.getCantidad());
-            insertar.setInt(4, pieza.getId());
+            insertar.setString(1, dato.getNombre());
+            insertar.setDouble(2, dato.getCosto());
+            insertar.setInt(3, dato.getCantidad());
+            insertar.setInt(4, dato.getId());
             insertar.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -90,21 +104,41 @@ public class PiezaDAO {
         return listado;
     }
     //va a servir para la lectura de carga de archivo
-    private static final String consulta="SELECT * FROM Pieza WHERE ( Nombre_Pieza =?) AND (Costo_Pieza=?);";
-    public Pieza consultaExiste(String nombre, Double precio){
+    private static final String consulta="SELECT * FROM CostoPieza WHERE (Pieza_Nombre_Pieza  =? AND Costo=?) LIMIT 1";
+    public Costo consultaExisteCosto(String nombre, Double precio){
         obtenerConexion();
         PreparedStatement obtener=null;
         ResultSet rs=null;
-        Pieza retorno=null;
-        System.out.println(""+nombre+" desde consulta existe");
+        Costo retorno=null;
         try {
             obtener=cn.prepareStatement(consulta);
             obtener.setString(1, nombre);
             obtener.setDouble(2, precio);
-            System.out.println("======"+obtener.toString()+"====");
             rs=obtener.executeQuery();
             while (rs.next()) {                
-                retorno=new Pieza(rs.getString("Nombre_Pieza"),rs.getDouble("Costo_Pieza"), rs.getInt("Cantidad_Pieza"), rs.getInt("idPieza"));
+                retorno=new Costo(rs.getInt("idCosto"), rs.getString("Pieza_Nombre_Pieza"), rs.getDouble("Costo"), rs.getInt("Cantidad"));
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        
+        return retorno;
+    }
+    
+    private static final String consultaPieza="SELECT * FROM Pieza WHERE ( Nombre_Pieza =?) LIMIT 1;";
+    public Pieza consultaExistePieza(String nombre){
+        obtenerConexion();
+        PreparedStatement obtener=null;
+        ResultSet rs=null;
+        Pieza retorno=null;
+        try {
+            obtener=cn.prepareStatement(consultaPieza);
+            obtener.setString(1, nombre);
+            
+            rs=obtener.executeQuery();
+            while (rs.next()) {                
+                retorno=new Pieza(rs.getString("Nombre_Pieza"));
                 
             }
         } catch (SQLException e) {

@@ -1,4 +1,5 @@
 Clases/EnsamblePieza.class
+Controlador/ControladorMueble.class
 server/LoginControl.class
 DAO/ClienteDAO.class
 main/Main.class
@@ -8,6 +9,7 @@ Clases/UsuarioAdministrador.class
 conexion/Conectar.class
 manejador/Verificar.class
 Clases/Pieza.class
+Clases/Costo.class
 manejador/Archivo.class
 Clases/Persona.class
 Clases/EnsambleMueble.class
@@ -21,5 +23,6 @@ Clases/Mueble.class
 Clases/Usuario.class
 server/ServerPieza.class
 server/ServerFabrica.class
+Clases/ProductoTienda.class
 server/CargaArchivo.class
 Clases/UsuarioVenta.class

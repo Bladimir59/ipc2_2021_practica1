@@ -1,3 +1,4 @@
+/home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/Clases/Costo.java
 /home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/Clases/Persona.java
 /home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/main/Main.java
 /home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/manejador/Archivo.java
@@ -12,6 +13,8 @@
 /home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/DAO/UsuarioDAO.java
 /home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/Clases/EnsamblePieza.java
 /home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/conexion/Conectar.java
+/home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/Clases/ProductoTienda.java
+/home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/Controlador/ControladorMueble.java
 /home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/server/LoginControl.java
 /home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/Clases/UsuarioFabrica.java
 /home/bladimir/Documentos/nuevo/ipc2_2021_practica1/Programa_en_Java/Practica1_IPC2/src/main/java/Clases/Mueble.java

@@ -26,13 +26,13 @@ public class EnsamblePiezasDAO {
         return cn;
     }
     //llenar los datos de ensamble pieza
-    private static final String nueva=" INSERT INTO Ensamble_Pieza (Mueble_Nombre_Mueble, Pieza_idPieza , cantidad) VALUES (?,?,?) ";
+    private static final String nueva=" INSERT INTO Ensamble_Pieza (Mueble_Nombre_Mueble, Pieza_Nombre_Pieza , cantidad) VALUES (?,?,?) ";
     public void nuevoEnsamblePieza (EnsamblePieza dato){
         obtenerConexion();
         try {
             PreparedStatement insertar=cn.prepareStatement(nueva);
             insertar.setString(1, dato.getNombreMueble());
-            insertar.setInt(2, dato.getCodigoPieza());
+            insertar.setString(2, dato.getNombrePieza());
             insertar.setInt(3, dato.getCantidad());
             insertar.executeUpdate();
         } catch (SQLException ex) {

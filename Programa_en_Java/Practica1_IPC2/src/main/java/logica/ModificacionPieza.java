@@ -37,7 +37,7 @@ public class ModificacionPieza {
     public void modificarPieza(){
         DAO.PiezaDAO modificar = new PiezaDAO();
         Pieza datos = new Pieza(nombre, precio, cantidad, codigo);
-        modificar.modificarPieza(datos);
+        //modificar.modificarPieza(datos);
     }
     //metodo para eliminar la pieza
     public void eliminarPieza(){

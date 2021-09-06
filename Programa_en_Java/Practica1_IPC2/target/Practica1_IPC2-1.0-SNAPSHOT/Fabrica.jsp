@@ -20,7 +20,7 @@
             <h2>Piezas</h2>
             elija la opcion para ver que necesita hacer con las piezas
             <label for="caso1">Operacion:</label>
-            <select name="caso1" required>
+            <select name="caso1">
                 <option value="Crear">Crear Pieza</option>
                 <option value="Modificar">Modificar Pieza</option>
                 <option value="Eliminar">Eliminar Pieza</option>
@@ -29,24 +29,21 @@
         </form>
         <br>
         <%--para ver las funciones que puede hacer con los muebles --%>
-        <form method="POST" action="">
+        
             <h2>Muebles</h2>
             elija la opcion para ver que necesita hacer con las piezas
-            <select name="caso2" required>
-                <option value="Ensamblar">Ensamblar Mueble</option>
-                <option value="Registrar">Registrar Mueble</option>
-            </select>
-            <button>Aceptar</button>            
-        </form>        
+            <a href="FabricaMueble/EnsambleMueble.jsp"><input type="button" value="Ensamblar"></a>
+            <a href="FabricaMueble/RegistrarMueble.jsp"><input type="button" value="Registrar"></a>
+                
         <br>
-        <form method="POST" action="">
+        <form method="POST" action="ServerFabrica">
             <h2>Informe</h2>
             elija la opcion para ver que necesita hacer con las piezas
-            <select name="caso3" required>
+            <select name="caso3">
                 <option value="verPieza">Ver Piezas</option>
                 <option value="verMueble">Ver Muebles</option>
             </select>
-            <button>Aceptar</button>
+            <button type="sumit">Aceptar</button>
         </form>
     </body>
 </html>
